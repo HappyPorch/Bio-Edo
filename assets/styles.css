@@ -6,7 +6,10 @@ html {
 body {
   background: #E5E5E5;
   margin: 0;
+  overflow: hidden;
   padding: 0;
+  position: fixed;
+  width: 100%;
 }
 
   body.actions-disabled button {
@@ -189,6 +192,11 @@ audio {
 }
 
 @media screen and (max-width: 749px) {
+  body {
+    position: unset;
+    overflow-y: unset;
+  }
+
   main {
     flex-direction: column;
   }
