@@ -5,6 +5,8 @@ html {
 
 body {
   background: #E5E5E5;
+  height: 100%;
+  height: -webkit-fill-available;
   margin: 0;
   overflow: hidden;
   padding: 0;
@@ -26,6 +28,8 @@ body {
 
 main {
   display: flex;
+  height: 100%;
+  height: -webkit-fill-available;
   margin: 0 auto;
   max-width: 1920px;
   min-height: 100vh;
