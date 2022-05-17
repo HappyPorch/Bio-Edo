@@ -1,3 +1,8 @@
+html {
+  height: 100%;
+  height: -webkit-fill-available;
+}
+
 body {
   background: #E5E5E5;
   margin: 0;
@@ -21,6 +26,7 @@ main {
   margin: 0 auto;
   max-width: 1920px;
   min-height: 100vh;
+  min-height: -webkit-fill-available;
 }
 
   main nav {
@@ -30,8 +36,9 @@ main {
     flex-grow: 1;
     justify-content: space-between;
     max-height: 100vh;
+    max-height: -webkit-fill-available;
     min-width: 125px;
-    padding: 20px;
+    padding: 0 20px;
   }
 
     main nav button {
