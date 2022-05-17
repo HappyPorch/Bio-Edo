@@ -38,7 +38,7 @@ main {
     max-height: 100vh;
     max-height: -webkit-fill-available;
     min-width: 125px;
-    padding: 0 20px;
+    padding: 20px;
   }
 
     main nav button {
