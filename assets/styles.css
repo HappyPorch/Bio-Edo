@@ -53,9 +53,10 @@ main {
       border: 3px solid transparent;
       border-radius: 25%;
       box-shadow: 0px 150px 120px rgba(0, 0, 0, 0.07), 0px 62.6664px 50.1331px rgba(0, 0, 0, 0.0503198), 0px 33.5045px 26.8036px rgba(0, 0, 0, 0.0417275), 0px 18.7823px 15.0259px rgba(0, 0, 0, 0.035), 0px 9.97515px 7.98012px rgba(0, 0, 0, 0.0282725), 0px 4.15088px 3.32071px rgba(0, 0, 0, 0.0196802);
-      max-height: calc((100vh - 240px) / 5); /* viewport height minus the margins of 5 buttons */
-      max-width: calc((100vh - 240px) / 5); /* same as height to make square button */
-      margin: 20px;
+      max-height: 33.333%;
+      max-width: 33.333%;
+      min-width: 75px;
+      margin: 15px;
       padding: 10px;
       transition: border-color .5s;
     }
