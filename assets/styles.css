@@ -1,0 +1,217 @@
+body {
+  background: #E5E5E5;
+  margin: 0;
+  padding: 0;
+}
+
+  body.actions-disabled button {
+    pointer-events: none;
+  }
+
+    body.actions-disabled button.active {
+      border-color: transparent;
+    }
+
+    body.actions-disabled button > img {
+      opacity: .5;
+    }
+
+main {
+  display: flex;
+  margin: 0 auto;
+  max-width: 1920px;
+  min-height: 100vh;
+}
+
+  main nav {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+    max-height: 100vh;
+    min-width: 125px;
+    padding: 20px;
+  }
+
+    main nav button {
+      background: #EBE9E9;
+      border: 3px solid transparent;
+      border-radius: 25%;
+      box-shadow: 0px 150px 120px rgba(0, 0, 0, 0.07), 0px 62.6664px 50.1331px rgba(0, 0, 0, 0.0503198), 0px 33.5045px 26.8036px rgba(0, 0, 0, 0.0417275), 0px 18.7823px 15.0259px rgba(0, 0, 0, 0.035), 0px 9.97515px 7.98012px rgba(0, 0, 0, 0.0282725), 0px 4.15088px 3.32071px rgba(0, 0, 0, 0.0196802);
+      max-height: calc((100vh - 240px) / 5); /* viewport height minus the margins of 5 buttons */
+      max-width: calc((100vh - 240px) / 5); /* same as height to make square button */
+      margin: 20px;
+      padding: 10px;
+      transition: border-color .5s;
+    }
+
+      main nav button:hover {
+        cursor: pointer;
+        border-color: #AAAAAA;
+      }
+
+      main nav button:disabled {
+        pointer-events: none;
+      }
+
+      main nav button:disabled > img {
+        opacity: .5;
+      }
+
+      main nav button.active {
+        border-color: green;
+      }
+
+        main nav button.active:disabled {
+          border-color: #818181;
+        }
+
+      main nav button img {
+        height: 100%;
+        transition: opacity .5s;
+        width: 100%;
+      }
+
+  main section {
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+  }
+
+    main section > div {
+      height: min(100vh, calc(100vw - 330px)); /* viewport height or available width minus nav bars on smaller tablets */
+      position: relative;
+      width: min(100vh, calc(100vw - 330px)); /* same as height to make square image area */
+    }
+
+    main section img {
+      height: auto;
+      left: 0;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      transition: opacity 1.5s;
+      width: 100%;
+    }
+
+      main section img.active {
+        opacity: 1;
+      }
+
+      main section img.animal {
+        transition: opacity 1.5s, transform 0s 1.5s, left 0s 1.5s, top 0s 1.5s;
+        transform: scale3d(.1, .1, .1);
+      }
+
+        main section img.animal.active {
+          transition: opacity 1s ease-in-out 1s, transform 2s ease-in-out 1s, left 2s ease-in-out 1s, top 2s ease-in-out 1s;
+          transform: scale3d(1, 1, 1);
+        }
+
+      main section img.hare {
+        top: 32%;
+        left: 15%;
+        width: 26%;
+      }
+
+        main section img.hare.active {
+          top: 17%;
+          left: 0;
+        }
+
+      main section img.owl {
+        left: 50%;
+        top: 28%;
+        width: 15%;
+      }
+
+        main section img.owl.active {
+          left: 45%;
+          top: 19%;
+        }
+
+      main section img.yellowhammer {
+        left: 63%;
+        top: 35%;
+        width: 13%;
+      }
+
+        main section img.yellowhammer.active {
+          left: 70%;
+          top: 28%;
+        }
+
+      main section img.fox {
+        left: 65%;
+        top: 35%;
+        width: 25%;
+      }
+
+        main section img.fox.active {
+          left: 78%;
+          top: 50%;
+        }
+
+      main section img.partridge {
+        left: 30%;
+        top: 50%;
+        width: 21%;
+      }
+
+        main section img.partridge.active {
+          left: 15%;
+          top: 73%;
+        }
+
+audio {
+  display: none;
+}
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: auto;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 749px) {
+  main {
+    flex-direction: column;
+  }
+
+  main nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+
+    main nav button {
+      margin: 10px;
+      max-width: 80px;
+    }
+
+  main nav:first-child {
+    order: 3;
+  }
+
+  main section {
+    order: 2;
+  }
+
+    main section > div {
+      height: 100vw;
+      margin: 0 20px;
+      width: 100vw;
+    }
+
+  main nav:last-child {
+    order: 1;
+  }
+}
