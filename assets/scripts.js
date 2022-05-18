@@ -1,13 +1,20 @@
-const toggleArea = (areaOrButton) =>
+const toggleArea = (areaOrButton, keepTerrain) =>
   new Promise((resolve) => {
     const area =
       typeof areaOrButton === "string"
         ? areaOrButton
         : areaOrButton.dataset.area;
 
+    const isAreaActive = 
+      document.querySelectorAll(`button[data-area="${area}"].active`).length > 0;
+
     // toggle the active state of all area elements (button, area image and animal image)
     document.querySelectorAll(`[data-area="${area}"]`).forEach((item) => {
-      item.classList.toggle("active");
+      if (keepTerrain && item.classList.contains('terrain')) {
+        return;
+      }
+
+      item.classList.toggle("active", !isAreaActive);
     });
 
     playAreaSound(area);
@@ -18,7 +25,7 @@ const toggleArea = (areaOrButton) =>
 const checkPesticidesButton = () =>
   new Promise((resolve) => {
     const hasActiveAreas =
-      document.querySelectorAll("[data-area].active").length > 0;
+      document.querySelectorAll("button[data-area].active").length > 0;
 
     // only enable pesticides button when at least one area has been activated
     document.getElementById("btnPesticides").disabled = !hasActiveAreas;
@@ -45,7 +52,7 @@ const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const playAreaSound = (area) =>
   new Promise((resolve) => {
     const isAreaActive =
-      document.querySelectorAll(`[data-area="${area}"].active`).length > 0;
+      document.querySelectorAll(`button[data-area="${area}"].active`).length > 0;
 
     if (!isAreaActive) {
       // don't play sound if area is not active
@@ -80,7 +87,7 @@ const usePesticides = () => {
 
   // toggle off each active area with a delay between each area
   activeAreas.forEach((area, index) =>
-    promises.push(wait(index * 1500).then(() => toggleArea(area)))
+    promises.push(wait(index * 1500).then(() => toggleArea(area, true)))
   );
 
   // once complete, disable the pesticides button and re-enable the action buttons
