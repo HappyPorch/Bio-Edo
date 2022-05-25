@@ -5,9 +5,13 @@ html {
 
 body {
   background: #E5E5E5;
+  display: flex;
+  flex-direction: column;
   height: 100%;
   height: -webkit-fill-available;
   margin: 0;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
   overflow: hidden;
   padding: 0;
   position: fixed;
@@ -26,14 +30,23 @@ body {
       opacity: .5;
     }
 
+header {
+  position: relative;
+}
+
+  header h1 {
+    margin: 10px auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
 main {
   display: flex;
   height: 100%;
   height: -webkit-fill-available;
   margin: 0 auto;
   max-width: 1920px;
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
 }
 
   main nav {
@@ -97,9 +110,9 @@ main {
   }
 
     main section > div {
-      height: min(100vh, calc(100vw - 330px)); /* viewport height or available width minus nav bars on smaller tablets */
+      height: min(calc(100vh - 50px), calc(100vw - 330px)); /* viewport height or available width minus nav bars on smaller tablets */
       position: relative;
-      width: min(100vh, calc(100vw - 330px)); /* same as height to make square image area */
+      width: min(calc(100vh - 50px), calc(100vw - 330px)); /* same as height to make square image area */
     }
 
     main section img {
@@ -181,26 +194,42 @@ main {
           top: 73%;
         }
 
-audio {
-  display: none;
+footer {
+  background: rgba(112, 142, 75, 0.31);
+  display: flex;
+  justify-content: center;
+  max-height: 50px;
+  padding: 5px;
+  width: 100%;
 }
 
-.visually-hidden {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: auto;
-  margin: 0;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-  white-space: nowrap;
+  footer a {
+    margin: 0 3em;
+  }
+
+  footer img {
+    height: 40px;
+    width: auto;
+  }
+
+audio {
+  display: none;
 }
 
 @media screen and (max-width: 749px) {
   body {
     position: unset;
     overflow-y: unset;
+  }
+
+  header {
+    text-align: center;
+  }
+
+  header h1 {
+    position: relative;
+    left: unset;
+    transform: unset;
   }
 
   main {
@@ -235,6 +264,15 @@ audio {
   main nav:last-child {
     order: 1;
   }
+
+  footer {
+    flex-wrap: wrap;
+    max-height: unset;
+  }
+
+    footer a {
+      margin-bottom: 1em;
+    }
 }
 
 @media screen and (min-height: 900px) {

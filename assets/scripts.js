@@ -19,16 +19,21 @@ const toggleArea = (areaOrButton, keepTerrain) =>
 
     playAreaSound(area);
 
-    checkPesticidesButton().then(() => resolve());
+    checkPesticidesAndResetButton().then(() => resolve());
   });
 
-const checkPesticidesButton = () =>
+const checkPesticidesAndResetButton = () =>
   new Promise((resolve) => {
     const hasActiveAreas =
       document.querySelectorAll("button[data-area].active").length > 0;
+    const hasVisibleAreas =
+      document.querySelectorAll("[data-area].active").length > 0;
 
     // only enable pesticides button when at least one area has been activated
     document.getElementById("btnPesticides").disabled = !hasActiveAreas;
+    
+    // only enable reset button when at least one area is active or visible
+    document.getElementById("btnReset").disabled = !hasActiveAreas && !hasVisibleAreas;
 
     resolve();
   });
@@ -93,6 +98,25 @@ const usePesticides = () => {
   // once complete, disable the pesticides button and re-enable the action buttons
   Promise.all(promises)
     .then(() => wait(2000))
-    .then(() => checkPesticidesButton())
+    .then(() => checkPesticidesAndResetButton())
+    .then(() => toggleActions(false));
+};
+
+const reset = () => {
+  toggleActions(true);
+
+  const promises = [];
+
+  // get list of all active areas
+  const activeAreas = document.querySelectorAll("[data-area].active");
+
+  // toggle off each active area
+  activeAreas.forEach((area) =>
+    area.classList.remove("active")
+  );
+
+  // once complete, disable the pesticides button and re-enable the action buttons
+  wait(2000)
+    .then(() => checkPesticidesAndResetButton())
     .then(() => toggleActions(false));
 };
