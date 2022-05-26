@@ -5,8 +5,13 @@ const toggleArea = (areaOrButton, keepTerrain) =>
         ? areaOrButton
         : areaOrButton.dataset.area;
 
-    const isAreaActive = 
+    let isAreaActive = 
       document.querySelectorAll(`button[data-area="${area}"].active`).length > 0;
+
+    if (keepTerrain) {
+      // to avoid showing already hidden area, assume it's active
+      isAreaActive = true;
+    }
 
     // toggle the active state of all area elements (button, area image and animal image)
     document.querySelectorAll(`[data-area="${area}"]`).forEach((item) => {
@@ -80,7 +85,7 @@ const usePesticides = () => {
   // get list of all active areas (in the order specified)
   const activeAreas = [
     ...new Set(
-      Array.from(document.querySelectorAll("[data-area].active"))
+      Array.from(document.querySelectorAll("button[data-area].active"))
         .map((item) => item.dataset.area)
         .sort((a, b) => areaSortOrder.indexOf(a) - areaSortOrder.indexOf(b))
     ),
