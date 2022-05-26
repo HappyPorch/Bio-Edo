@@ -234,6 +234,8 @@ audio {
 
   main {
     flex-direction: column;
+    height: unset;
+    width: 100vw;
   }
 
   main nav {
@@ -244,11 +246,13 @@ audio {
 
     main nav button {
       margin: 10px;
-      max-width: 80px;
+      max-width: 70px;
+      min-width: unset;
     }
 
   main nav:first-child {
     order: 3;
+    padding-top: 0;
   }
 
   main section {
@@ -256,18 +260,20 @@ audio {
   }
 
     main section > div {
-      height: 100vw;
+      height: calc(100vw - 40px);
       margin: 0 20px;
       width: 100vw;
     }
 
-  main nav:last-child {
+  main nav:nth-child(3) {
     order: 1;
+    padding-bottom: 0;
   }
 
   footer {
     flex-wrap: wrap;
     max-height: unset;
+    padding-top: 1em;
   }
 
     footer a {
