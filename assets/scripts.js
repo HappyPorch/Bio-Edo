@@ -17,7 +17,7 @@ const toggleArea = (areaOrButton, keepTerrain) =>
       item.classList.toggle("active", !isAreaActive);
     });
 
-    playAreaSound(area);
+    toggleAreaSound(area, isAreaActive);
 
     checkPesticidesAndResetButton().then(() => resolve());
   });
@@ -54,26 +54,22 @@ const areaSortOrder = [
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const playAreaSound = (area) =>
+const toggleAreaSound = (area, isAreaActive) =>
   new Promise((resolve) => {
-    const isAreaActive =
-      document.querySelectorAll(`button[data-area="${area}"].active`).length > 0;
-
-    if (!isAreaActive) {
-      // don't play sound if area is not active
-      resolve();
-      return;
-    }
-
     const areaAudio = document.querySelector(`audio[data-area="${area}"]`);
 
-    // play first 5 seconds of the audio file and then reset it back to the start
-    areaAudio
-      .play()
-      .then(() => wait(5000))
-      .then(() => areaAudio.pause())
-      .then(() => areaAudio.load())
-      .then(() => resolve());
+    if (isAreaActive) {
+      // stop playing and reset audio file
+      areaAudio.pause();
+      areaAudio.load();
+      resolve();
+    }
+    else {
+      // start playing area sound
+      areaAudio
+        .play()
+        .then(() => resolve());
+    }
   });
 
 const usePesticides = () => {
@@ -105,15 +101,15 @@ const usePesticides = () => {
 const reset = () => {
   toggleActions(true);
 
-  const promises = [];
-
-  // get list of all active areas
+  // get list of all active and visible areas
   const activeAreas = document.querySelectorAll("[data-area].active");
 
   // toggle off each active area
-  activeAreas.forEach((area) =>
-    area.classList.remove("active")
-  );
+  activeAreas.forEach((area) => {
+    area.classList.remove("active");
+
+    toggleAreaSound(area.dataset.area, true);
+  });
 
   // once complete, disable the pesticides button and re-enable the action buttons
   wait(2000)
